@@ -1,0 +1,58 @@
+{
+  "name": "lambda-taggable-elasticsearch-indexer",
+  "version": "1.0.1",
+  "description": "Lambda that will be triggered when inserting a tag at S3 bucket and will index data into elasticsearch.",
+  "main": "index.js",
+  "scripts": {
+    "test": "semistandard",
+    "invoke": "node invoke.js",
+    "deploy": "node ./node_modules/dpl/dpl.js",
+    "nocov": "node ./node_modules/.bin/mocha test/*.test.js",
+    "semistandard": "semistandard --verbose | snazzy",
+    "coverage": "./node_modules/.bin/istanbul cover --include-all-sources ./node_modules/.bin/_mocha test --report lcov -- --recursive -R spec -t 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/numo-labs/lambda-taggable-elasticsearch-indexer.git"
+  },
+  "keywords": [
+    "Lambda",
+    "elasticsearch",
+    "s3"
+  ],
+  "author": "Marcelo J. Gomez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/numo-labs/lambda-taggable-elasticsearch-indexer/issues"
+  },
+  "homepage": "https://github.com/numo-labs/lambda-taggable-elasticsearch-indexer#readme",
+  "dependencies": {
+    "elasticsearch": "^11.0.1",
+    "http-aws-es": "^1.1.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dpl": "^3.0.1",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.4.5",
+    "rewire": "^2.5.1",
+    "semistandard": "^7.0.5"
+  },
+  "semistandard": {
+    "globals": [
+      "describe",
+      "it",
+      "afterEach"
+    ]
+  },
+  "files_to_deploy": [
+    "package.json",
+    "config.js",
+    "index.js",
+    "/lib"
+  ],
+  "pre-commit": [
+    "semistandard",
+    "coverage"
+  ]
+}
