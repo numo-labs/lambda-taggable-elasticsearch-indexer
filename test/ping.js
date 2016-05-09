@@ -1,4 +1,4 @@
-require('env2')('.env')
+require('env2')('.env');
 console.log(process.env);
 var es = require('elasticsearch').Client({
   hosts: process.env.AWS_ES_ENDPOINT,
@@ -13,7 +13,7 @@ var es = require('elasticsearch').Client({
 es.ping({
   requestTimeout: Infinity,  // ping usually has a 3000ms timeout
   // undocumented params are appended to the query string
-  hello: "elasticsearch!"
+  hello: 'elasticsearch!'
 }, function (error, res) {
   if (error) {
     console.trace('ELASTICSEARCH ERROR:', error);

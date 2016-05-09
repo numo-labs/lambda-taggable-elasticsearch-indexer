@@ -1,15 +1,21 @@
 'use strict';
-
-const config = require('./config.js');
+require('env2')('.env');
 var S3 = require('./lib/s3');
 var elasticsearch = require('./lib/elasticsearch');
+var AwsHelper = require('aws-lambda-helper');
 
-exports.handler = function (event, context, cb) {
-  console.log('Incoming event', JSON.stringify(event));
+exports.handler = function (event, context, callback) {
+  if (!event.Records) { // Check if an tag id is provided
+    return callback(new Error('invalid event', JSON.stringify(event)));
+  }
+  // console.log('Incoming event:', JSON.stringify(event, null, 2));
   const key = event.Records[0].s3.object.key.replace(/%3A/, ':'); // adding back the :
-  S3.getObjectByKey(config.S3.bucket, key, function(err, data) { 
-    elasticsearch.insertObject(data, function(err, data){
-      cb(err, data);
+  console.log('S3 Record Key:', key);
+  S3.getObjectByKey(process.env.AWS_S3_BUCKET, key, function (err, data) {
+    AwsHelper.failOnError(err, event, context);
+    elasticsearch.insertObject(data, function (err, response) {
+      AwsHelper.failOnError(err, event, context);
+      callback(err, response);
     });
-  })
+  });
 };
