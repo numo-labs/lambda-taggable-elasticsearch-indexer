@@ -1,6 +1,7 @@
 require('env2')('.env')
+console.log(process.env);
 var es = require('elasticsearch').Client({
-  hosts: process.env.AWS_ES,
+  hosts: process.env.AWS_ES_ENDPOINT,
   connectionClass: require('http-aws-es'),
   amazonES: {
     region: process.env.AWS_REGION,
@@ -9,16 +10,14 @@ var es = require('elasticsearch').Client({
   }
 });
 // console.log(es);
-
 es.ping({
-  // ping usually has a 3000ms timeout
-  requestTimeout: Infinity,
+  requestTimeout: Infinity,  // ping usually has a 3000ms timeout
   // undocumented params are appended to the query string
   hello: "elasticsearch!"
-}, function (error) {
+}, function (error, res) {
   if (error) {
-    console.trace('elasticsearch cluster is down!');
+    console.trace('ELASTICSEARCH ERROR:', error);
   } else {
-    console.log('All is well');
+    console.log('All is well', res);
   }
 });
