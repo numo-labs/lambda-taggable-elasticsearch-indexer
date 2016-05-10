@@ -15,6 +15,7 @@ exports.handler = function (event, context, callback) {
     AwsHelper.failOnError(err, event, context);
     es_insert(data, function (err, response) {
       AwsHelper.failOnError(err, event, context);
+      console.log(response);
       callback(err, response);
     });
   });

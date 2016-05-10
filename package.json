@@ -1,6 +1,6 @@
 {
   "name": "lambda-taggable-elasticsearch-indexer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lambda that will be triggered when inserting a tag at S3 bucket and will index data into elasticsearch.",
   "main": "index.js",
   "scripts": {
