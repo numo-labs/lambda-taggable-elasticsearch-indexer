@@ -1,6 +1,10 @@
 # Lambda Taggable Elasticsearch Indexer
 
 [![Codeship](https://img.shields.io/codeship/a7841560-f843-0133-b116-52282068b433.svg)](https://codeship.com/projects/150886)
+[![codecov](https://codecov.io/gh/numo-labs/lambda-taggable-elasticsearch-indexer/branch/master/graph/badge.svg)](https://codecov.io/gh/numo-labs/lambda-taggable-elasticsearch-indexer)
+[![Dependency Status](https://david-dm.org/numo-labs/lambda-taggable-elasticsearch-indexer.svg)](https://david-dm.org/numo-labs/lambda-taggable-elasticsearch-indexer)
+[![devDependency Status](https://david-dm.org/numo-labs/lambda-taggable-elasticsearch-indexer/dev-status.svg)](https://david-dm.org/numo-labs/lambda-taggable-elasticsearch-indexer#info=devDependencies)
+
 
 Listen for updates in tags in the numo-taggy/ci S3 bucket and update ElasticSearch record.
 
@@ -143,4 +147,3 @@ If you need to check if your environment variables are correct, try running:
 ```sh
 node test/ping.js
 ```
-
