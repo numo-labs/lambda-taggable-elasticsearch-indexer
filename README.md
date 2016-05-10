@@ -1,10 +1,14 @@
-# lambda-taggable-cloudsearch-indexer
+# Lambda Taggable Elasticsearch Indexer
 
-[![Codeship](https://img.shields.io/codeship/eb3fea00-f386-0133-6f3c-5a072c31b987.svg)](https://codeship.com/projects/149808)
+[![Codeship](https://img.shields.io/codeship/a7841560-f843-0133-b116-52282068b433.svg)](https://codeship.com/projects/150886)
+[![codecov](https://codecov.io/gh/numo-labs/lambda-taggable-elasticsearch-indexer/branch/master/graph/badge.svg)](https://codecov.io/gh/numo-labs/lambda-taggable-elasticsearch-indexer)
+[![Dependency Status](https://david-dm.org/numo-labs/lambda-taggable-elasticsearch-indexer.svg)](https://david-dm.org/numo-labs/lambda-taggable-elasticsearch-indexer)
+[![devDependency Status](https://david-dm.org/numo-labs/lambda-taggable-elasticsearch-indexer/dev-status.svg)](https://david-dm.org/numo-labs/lambda-taggable-elasticsearch-indexer#info=devDependencies)
 
-Listen for updates in tags in the numo-taggy/ci S3 bucket and update CloudSearch record.
 
-The data inserted to CloudSearch will be used to autocomplete at the tagging system and isearch-ui.
+Listen for updates in tags in the numo-taggy/ci S3 bucket and update ElasticSearch record.
+
+The data inserted to ElasticSearch will be used to autocomplete at the tagging system and isearch-ui.
 
 Tags will be created as follows:
 ```js
@@ -118,15 +122,28 @@ For example, with the following input:
 
  ```
 
- ### Environment Variables
+### Environment Variables
 
- To run/develop/test this Lambda *locally* you will need to
- export the following Environment Variables:
+To run/develop/test this Lambda *locally* you will need to
+export the following Environment Variables:
 
  ```sh
- export AWS_REGION=eu-west-1
- export AWS_IAM_ROLE=arn:aws:iam::12346789:role/dummy
- export AWS_ACCESS_KEY_ID=YourAccessKeyHere
- export AWS_SECRET_ACCESS_KEY=YourSecret
+export AWS_ES_ENDPOINT=yourdomain.eu-west-1.es.amazonaws.com
+export AWS_S3_BUCKET=numo-taggy
+export AWS_REGION=eu-west-1
+export AWS_IAM_ROLE=arn:aws:iam::1234567890:role/lambdafull
+export AWS_ACCESS_KEY_ID=YORKIE
+export AWS_SECRET_ACCESS_KEY=SuperSecret
  ```
-> replace the values for your actual ones... if you need help ask!
+
+Copy the `sample.env` to `.env` and add the valid values for the access keys.
+
+```sh
+cp sample.env .env
+```
+> if you don't have the keys get them from CodeShip
+
+If you need to check if your environment variables are correct, try running:
+```sh
+node test/ping.js
+```
