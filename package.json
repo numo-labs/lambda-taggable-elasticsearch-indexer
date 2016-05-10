@@ -49,9 +49,9 @@
   },
   "files_to_deploy": [
     "package.json",
-    "config.js",
     "index.js",
-    "/lib"
+    "/lib",
+    ".env"
   ],
   "pre-commit": [
     "semistandard",
