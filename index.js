@@ -11,13 +11,11 @@ exports.handler = function (event, context, callback) {
   const key = event.Records[0].s3.object.key.replace(/%3A/, ':'); // adding back the :
   console.log('S3 Record Key:', key);
   S3(process.env.AWS_S3_BUCKET, key, function (err, data) {
-    if (err) {
-      return callback(err);
-    }
+    /* istanbul ignore next */
+    if (err) { return callback(err); }
     es_insert(data, function (err, response) {
-      if (err) {
-        return callback(err);
-      }
+      /* istanbul ignore next */
+      if (err) { return callback(err); }
       console.log(response);
       callback(null, response);
     });
